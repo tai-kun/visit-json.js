@@ -1,0 +1,22 @@
+{
+  "lineWidth": 80,
+  "typescript": {
+    "semiColons": "asi",
+    "trailingCommas": "onlyMultiLine",
+    "singleBodyPosition": "nextLine",
+    "arrowFunction.useParentheses": "preferNone"
+  },
+  "includes": [
+    ".vscode/**/*.json",
+    "@types/**/*",
+    "config/**/*.js",
+    "src/**/*",
+    "dprint.json",
+    "package.json",
+    "tsconfig.json"
+  ],
+  "plugins": [
+    "https://plugins.dprint.dev/typescript-0.89.0.wasm",
+    "https://plugins.dprint.dev/json-0.19.1.wasm"
+  ]
+}

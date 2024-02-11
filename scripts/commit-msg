@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+MESSAGE="$1"
+
+function regex() {
+    [[ "$(echo -n "$MESSAGE" | grep -oP "$1")" != '' ]]
+}
+
+function lsdirs() {
+    local dir="$1"
+    local dirs
+
+    shift
+    dirs="$(find "$dir" "$@" -mindepth 1 -type d | sed "s|^$dir/||" | paste -sd '|')"
+
+    if [[ "$dirs" != '' ]]; then
+        dirs="|$dirs"
+    fi
+
+    echo "${dirs:1}"
+}
+
+TYPE='(docs|style|refactor|perf|test|chore|revert|feat|fix)'
+
+src_scope="$(lsdirs src)"
+scope="(@types|config|scripts|src|$src_scope)"
+scope="${scope//$/\\$}"
+
+regex "^$TYPE(\($scope\))?: .+$" && exit 0
+regex "^build(\((deps|deps-dev)\))?: .+$" && exit 0
+regex "^ci: .+$" && exit 0
+
+echo 'Invalid commit message format.'
+exit 1

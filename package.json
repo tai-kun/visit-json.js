@@ -1,0 +1,41 @@
+{
+  "name": "visit-json",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@rollup/plugin-replace": "~5.0.5",
+    "@rollup/plugin-typescript": "~11.1.6",
+    "@swc-node/register": "~1.8.0",
+    "@tsconfig/node21": "~21.0.1",
+    "@tsconfig/strictest": "~2.0.3",
+    "@types/node": "~20.11.17",
+    "cfg-test": "~0.2.0",
+    "dprint": "~0.45.0",
+    "glob": "~10.3.10",
+    "plop": "~4.0.1",
+    "rollup": "~4.10.0",
+    "typescript": "~5.3.3"
+  },
+  "scripts": {
+    "add": "plop --plopfile config/code/plopfile.js",
+    "tsc": "tsc --noEmit",
+    "fmt": "dprint fmt",
+    "lint": "exit 0",
+    "test": "node --enable-source-maps --import cfg-test --test src/**/*.ts",
+    "build": "rollup -c config/code/rollup.config.js",
+    "postinstall": "test ! -f scripts/postinstall.sh || bash scripts/postinstall.sh"
+  },
+  "volta": {
+    "node": "21.6.1"
+  }
+}

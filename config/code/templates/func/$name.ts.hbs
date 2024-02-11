@@ -1,0 +1,9 @@
+export default function {{basename outpath}}() {}
+
+if (cfgTest && process.env.CFG_TEST_FILE === import.meta.filename) {
+  const { assert, describe, test } = cfgTest
+
+  describe("{{dirname outpath}}/{{basename outpath}}", () => {
+    test.todo("Not implemented")
+  })
+}
