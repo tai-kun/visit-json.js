@@ -26,6 +26,14 @@
     "rollup": "~4.10.0",
     "typescript": "~5.3.3"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tai-kun/cfg-test.js"
+  },
+  "author": {
+    "name": "tai-kun",
+    "url": "https://github.com/tai-kun"
+  },
   "scripts": {
     "add": "plop --plopfile config/code/plopfile.js",
     "tsc": "tsc --noEmit",
@@ -37,5 +45,11 @@
   },
   "volta": {
     "node": "21.6.1"
-  }
+  },
+  "keywords": [
+    "json",
+    "visit",
+    "visitor",
+    "traverse"
+  ]
 }
