@@ -11,10 +11,10 @@ export type JsonValue = JsonPrimitive | JsonObject | JsonArray
 export type JsonPrimitiveLike = JsonPrimitive | undefined
 
 export type JsonObjectLike = {
-  [Key in keyof any]?: JsonValueLike | undefined
+  readonly [Key in keyof any]?: JsonValueLike | undefined
 }
 
-export type JsonArrayLike = JsonValueLike[]
+export type JsonArrayLike = readonly JsonValueLike[]
 
 export type JsonValueLike = JsonPrimitiveLike | JsonObjectLike | JsonArrayLike
 
