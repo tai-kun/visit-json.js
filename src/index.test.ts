@@ -1,3 +1,5 @@
+import type { JsonObject } from "type-fest"
+
 import visitJson from "./index"
 import * as json from "./index"
 
@@ -9,6 +11,11 @@ if (cfgTest && process.env.CFG_TEST_FILE === import.meta.filename) {
       assert.equal(typeof visitJson, "function")
       assert.equal(visitJson, json.visit)
       assert.equal(typeof json.BREAK, "symbol")
+    })
+
+    test("types", () => {
+      const root: JsonObject = {}
+      visitJson(root, () => undefined)
     })
   })
 }

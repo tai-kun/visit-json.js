@@ -24,6 +24,7 @@
     "glob": "~10.3.10",
     "plop": "~4.0.1",
     "rollup": "~4.10.0",
+    "type-fest": "~4.10.2",
     "typescript": "~5.3.3"
   },
   "repository": {
