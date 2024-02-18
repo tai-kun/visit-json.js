@@ -14,17 +14,15 @@
     "dist"
   ],
   "devDependencies": {
-    "@rollup/plugin-replace": "~5.0.5",
-    "@rollup/plugin-typescript": "~11.1.6",
     "@swc-node/register": "~1.8.0",
     "@tsconfig/node21": "~21.0.1",
     "@tsconfig/strictest": "~2.0.3",
-    "@types/node": "~20.11.17",
-    "cfg-test": "~0.2.0",
+    "@types/node": "~20.11.19",
+    "cfg-test": "~0.4.1",
     "dprint": "~0.45.0",
+    "esbuild": "~0.20.0",
     "glob": "~10.3.10",
     "plop": "~4.0.1",
-    "rollup": "~4.10.0",
     "type-fest": "~4.10.2",
     "typescript": "~5.3.3"
   },
@@ -42,7 +40,7 @@
     "fmt": "dprint fmt",
     "lint": "exit 0",
     "test": "node --enable-source-maps --import cfg-test --test src/**/*.ts",
-    "build": "rollup -c config/code/rollup.config.js",
+    "build": "scripts/build.sh",
     "postinstall": "test ! -f scripts/postinstall.sh || scripts/postinstall.sh"
   },
   "volta": {

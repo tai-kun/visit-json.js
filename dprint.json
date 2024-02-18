@@ -10,6 +10,7 @@
     ".vscode/**/*.json",
     "@types/**/*",
     "config/**/*.js",
+    "scripts/**/*.js",
     "src/**/*",
     "dprint.json",
     "package.json",
