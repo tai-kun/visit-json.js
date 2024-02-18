@@ -43,7 +43,7 @@
     "lint": "exit 0",
     "test": "node --enable-source-maps --import cfg-test --test src/**/*.ts",
     "build": "rollup -c config/code/rollup.config.js",
-    "postinstall": "test ! -f scripts/postinstall.sh || bash scripts/postinstall.sh"
+    "postinstall": "test ! -f scripts/postinstall.sh || scripts/postinstall.sh"
   },
   "volta": {
     "node": "21.6.1"
