@@ -42,7 +42,7 @@ export type JsonVisitor = {
   readonly Primitive?: JsonVisitorFn<JsonPrimitiveLike> | undefined
 }
 
-if (cfgTest && process.env.CFG_TEST_FILE === import.meta.filename) {
+if (cfgTest && cfgTest.url === import.meta.url) {
   const { describe } = cfgTest
 
   describe("src/visitor", () => {

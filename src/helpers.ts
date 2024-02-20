@@ -144,7 +144,7 @@ export function isAndBreak(o: unknown): o is AndBreak {
   return isPlainObject(o) && o["keyword"] === AND_BREAK && "payload" in o
 }
 
-if (cfgTest && process.env.CFG_TEST_FILE === import.meta.filename) {
+if (cfgTest && cfgTest.url === import.meta.url) {
   const { assert, describe, test } = cfgTest
 
   describe("src/helpers", () => {

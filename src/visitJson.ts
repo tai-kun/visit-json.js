@@ -220,7 +220,7 @@ export function visitJson(
   return x
 }
 
-if (cfgTest && process.env.CFG_TEST_FILE === import.meta.filename) {
+if (cfgTest && cfgTest.url === import.meta.url) {
   const { assert, describe, test } = cfgTest
 
   describe("src/visitJson", () => {

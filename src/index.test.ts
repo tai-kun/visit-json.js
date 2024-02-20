@@ -3,7 +3,7 @@ import type { JsonObject } from "type-fest"
 import visitJson from "./index"
 import * as json from "./index"
 
-if (cfgTest && process.env.CFG_TEST_FILE === import.meta.filename) {
+if (cfgTest && cfgTest.url === import.meta.url) {
   const { assert, describe, test } = cfgTest
 
   describe("src/index.test", () => {
