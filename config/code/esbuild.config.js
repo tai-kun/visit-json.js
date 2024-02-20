@@ -33,6 +33,7 @@ export default [
     define: buildDefine,
     minifySyntax: true,
     pure: [
+      "Symbol",
       "Symbol.for",
     ],
   },
