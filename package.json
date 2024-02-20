@@ -38,7 +38,7 @@
     "tsc": "tsc --noEmit",
     "fmt": "dprint fmt",
     "lint": "exit 0",
-    "test": "node --enable-source-maps --import cfg-test --test src/**/*.ts",
+    "test": "node --enable-source-maps --import cfg-test --test 'src/**/*.ts'",
     "build": "scripts/build.sh",
     "postinstall": "test ! -f scripts/postinstall.sh || scripts/postinstall.sh"
   },
