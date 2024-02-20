@@ -21,7 +21,6 @@
     "cfg-test": "~0.4.1",
     "dprint": "~0.45.0",
     "esbuild": "~0.20.0",
-    "glob": "~10.3.10",
     "plop": "~4.0.1",
     "type-fest": "~4.10.2",
     "typescript": "~5.3.3"
