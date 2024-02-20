@@ -11,5 +11,9 @@ export type {
 } from "./helpers"
 export { BREAK, PASS, REMOVE, SKIP } from "./helpers"
 export { andBreak, isAndBreak, isJsonPrimitive, isPlainObject } from "./helpers"
-export { visitJson as default, visitJson as visit } from "./visitJson"
+export {
+  visitJson as default,
+  visitJson as visit,
+  type VisitOptions,
+} from "./visitJson"
 export type { JsonVisitor, JsonVisitorFn, PathSegment } from "./visitor"

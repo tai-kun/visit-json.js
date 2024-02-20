@@ -19,6 +19,21 @@ import {
 } from "./helpers"
 import type { JsonVisitor, JsonVisitorFn, PathSegment } from "./visitor"
 
+export interface VisitOptions {
+  /**
+   * Remove empty arrays.
+   *
+   * @default false
+   */
+  readonly removeEmptyArray?: boolean | undefined
+  /**
+   * Remove empty objects.
+   *
+   * @default false
+   */
+  readonly removeEmptyObject?: boolean | undefined
+}
+
 /**
  * Call the given visitor function.
  *
@@ -32,7 +47,7 @@ function inner(
   path: readonly [PathSegment, ...PathSegment[]] | readonly [],
   value: JsonValueLike,
   parent: JsonArrayLike | JsonObjectLike | null,
-  visitor: JsonVisitor,
+  visitor: JsonVisitor & VisitOptions,
 ): AndBreak | JsonValue | typeof REMOVE {
   let x, y
 
@@ -64,7 +79,9 @@ function inner(
             acc.push(y)
           }
 
-          return acc
+          return visitor.removeEmptyArray && acc.length === 0
+            ? REMOVE
+            : acc
         }
 
         case SKIP:
@@ -82,6 +99,7 @@ function inner(
         case PASS:
         case undefined: {
           let acc: JsonObject = {}
+          let hasKey = false
 
           for (const key of Object.keys(value)) {
             y = inner([...path, key], value[key], value, visitor)
@@ -106,9 +124,12 @@ function inner(
             }
 
             acc[key] = y
+            hasKey = true
           }
 
-          return acc
+          return visitor.removeEmptyObject && !hasKey
+            ? REMOVE
+            : acc
         }
 
         case SKIP:
@@ -144,15 +165,36 @@ function inner(
  * Traverse JSON and apply changes.
  *
  * @param root top-level JSON value.
- * @param visitor visitor functions.
+ * @param visitor visitor function.
+ * @param options options.
  * @returns JSON value.
  */
 export function visitJson(
   root: JsonValueLike,
-  visitor: JsonVisitorFn | JsonVisitor,
+  visitor: JsonVisitorFn,
+  options?: VisitOptions | undefined,
+): JsonValue
+
+/**
+ * Traverse JSON and apply changes.
+ *
+ * @param root top-level JSON value.
+ * @param visitor visitor functions and options.
+ * @returns JSON value.
+ */
+export function visitJson(
+  root: JsonValueLike,
+  visitor: JsonVisitor & VisitOptions,
+): JsonValue
+
+export function visitJson(
+  root: JsonValueLike,
+  visitor: JsonVisitorFn | (JsonVisitor & VisitOptions),
+  options: VisitOptions = {},
 ): JsonValue {
   if (typeof visitor === "function") {
     visitor = {
+      ...options,
       Array: visitor,
       Object: visitor,
       Primitive: visitor,
@@ -435,6 +477,60 @@ if (cfgTest && process.env.CFG_TEST_FILE === import.meta.filename) {
           },
         },
       }
+
+      assert.deepEqual(actual, expected)
+    })
+
+    test("should remove empty arrays if `options.removeEmptyArray` is `true`", () => {
+      const root = {
+        a: {
+          b: [
+            4,
+          ],
+        },
+      }
+      const actual = visitJson(root, value => {
+        if (value === 4) {
+          return REMOVE
+        }
+
+        return PASS
+      }, {
+        removeEmptyArray: true,
+      })
+      const expected = {
+        a: {
+          // 4 is removed by the visitor function
+          // `b` is removed
+        },
+      }
+
+      assert.deepEqual(actual, expected)
+    })
+
+    test("should remove empty objects if `options.removeEmptyObject` is `true`", () => {
+      const root = {
+        a: {
+          b: {
+            c: 4,
+          },
+        },
+      }
+      const actual = visitJson(root, {
+        Primitive(value) {
+          if (value === 4) {
+            return REMOVE
+          }
+
+          return PASS
+        },
+        removeEmptyObject: true,
+      })
+      // `c` is removed by the visitor function
+      // `b` is removed
+      // `a` is removed
+      // The root is removed
+      const expected = null
 
       assert.deepEqual(actual, expected)
     })
