@@ -6,7 +6,7 @@ import type {
   JsonObjectLike,
   JsonValue,
   JsonValueLike,
-} from "./helpers.js"
+} from "./helpers"
 import {
   andBreak,
   BREAK,
@@ -16,8 +16,8 @@ import {
   PASS,
   REMOVE,
   SKIP,
-} from "./helpers.js"
-import type { JsonVisitor, JsonVisitorFn, PathSegment } from "./visitor.js"
+} from "./helpers"
+import type { JsonVisitor, JsonVisitorFn, PathSegment } from "./visitor"
 
 export interface VisitOptions {
   /**
