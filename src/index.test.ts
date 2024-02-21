@@ -1,7 +1,7 @@
 import type { JsonObject } from "type-fest"
 
-import visitJson from "./index"
-import * as json from "./index"
+import visitJson from "./index.js"
+import * as json from "./index.js"
 
 if (cfgTest && cfgTest.url === import.meta.url) {
   const { assert, describe, test } = cfgTest

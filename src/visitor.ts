@@ -7,8 +7,8 @@ import type {
   JsonValueLike,
   REMOVE,
   SKIP,
-} from "./helpers"
-import { BREAK, PASS } from "./helpers"
+} from "./helpers.js"
+import { BREAK, PASS } from "./helpers.js"
 
 export type PathSegment = string | number
 

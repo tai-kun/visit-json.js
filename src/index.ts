@@ -8,12 +8,20 @@ export type {
   JsonPrimitiveLike,
   JsonValue,
   JsonValueLike,
-} from "./helpers"
-export { BREAK, PASS, REMOVE, SKIP } from "./helpers"
-export { andBreak, isAndBreak, isJsonPrimitive, isPlainObject } from "./helpers"
+} from "./helpers.js"
+export {
+  andBreak,
+  BREAK,
+  isAndBreak,
+  isJsonPrimitive,
+  isPlainObject,
+  PASS,
+  REMOVE,
+  SKIP,
+} from "./helpers.js"
 export {
   visitJson as default,
   visitJson as visit,
   type VisitOptions,
-} from "./visitJson"
-export type { JsonVisitor, JsonVisitorFn, PathSegment } from "./visitor"
+} from "./visitJson.js"
+export type { JsonVisitor, JsonVisitorFn, PathSegment } from "./visitor.js"
